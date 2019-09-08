@@ -1,0 +1,44 @@
+@import '../app.component.scss';
+
+.navbar-icon {
+    height: 35px;
+    margin: 8px 0 8px 1px;
+    padding: 0 15px;
+
+    img {
+        transform: rotate(60deg);
+        max-height: 30px;
+        margin-top: 4px;
+    }
+}
+
+.navbar-toggler{
+    border-color: $blue;
+    
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(51,122,183, 0.7)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+    }
+}
+
+.navbar {
+    background-color: $very-light-blue !important;
+    border-bottom: 1px solid $blue;
+
+    .nav-link {
+        color: $blue;
+        &.active {
+            color: $dark-blue;
+            font-weight: 500;
+        }
+        span {
+            cursor: pointer;
+        }
+    }
+}
+
+@media (max-width: 767px) {
+    .navbar:last-child {
+        background-color: $very-light-blue;
+        border-bottom:1px solid $blue;
+    }
+}

@@ -1,2 +1,65 @@
 /* You can add global styles to this file, and also import other style files */
 @import './variables';
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+p {
+    text-align: justify;
+}
+
+h1, h2, h3 {
+    color: $blue;
+    padding-bottom: .7em;
+}
+
+h5 {
+    border-bottom: 2px solid $light-blue;
+    color: $blue;
+    padding-bottom: .5rem;
+}
+
+i {
+    color: $blue;
+}
+
+.btn {
+    background-color: $white;
+    border-color: $blue;
+    color: $blue;
+    cursor: pointer;
+    
+    &:focus, &:hover {
+        background-color: $very-light-blue;
+    }
+
+    &:disabled {
+        background-color: $white;
+        border-color: $light-blue;
+        color: $light-blue;
+    }
+}
+
+.rigthAlign {
+    float: right;
+}
+
+.displayNone {
+    display: none;
+}
+
+.table {
+    th {
+        border-top: none;
+        color: $blue;
+    }
+    tbody {
+        tr {
+            &:hover {
+                background-color: $very-light-blue;
+            }
+            td:last-child {
+                text-align: right;
+                cursor: pointer;
+            }
+        }
+    }
+}

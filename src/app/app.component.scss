@@ -1,0 +1,78 @@
+@import '../sass/styles.scss';
+
+.section-container {
+    margin: 1em 0 5em;
+}
+
+.loader {
+    animation: spin 2s linear infinite;
+    border: 10px solid aliceblue;
+    border-radius: 50%;
+    border-top: 10px solid $blue;
+    height: 80px;
+    width: 80px;
+    visibility: hidden;
+    /* centered position */
+    left: 50%;
+    top: 50%;
+    margin: 0;
+    margin-left: -40px;
+    margin-top: -40px;
+    position: absolute;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* FORM */
+.justify-center {
+    display: flex;
+    justify-content: center;
+}
+
+label {
+    color: $blue;
+    display: inline;
+}
+
+.form-control {
+    border-color: $blue; 
+
+    &::placeholder {
+        color: $light-blue
+    }
+}
+
+input.ng-invalid.ng-dirty.ng-touched {
+    border-color: $error;
+    box-shadow: 0 0 0.2rem $error;
+}
+/* FORM */
+
+
+/* JUMBOTRON */
+.jumbotron {
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 30px;
+
+    p, h1 {
+        color: $white;
+    }
+    
+    .btn {
+        background-color: $dark-blue;
+        color: $white;
+        border-color: $white;
+        
+        &:focus, &:hover {
+            background-color: transparent;
+            color: $dark-blue;
+            border-color: $dark-blue;
+            font-weight: 600;
+        }
+    }
+}
+/* JUMBOTRON */

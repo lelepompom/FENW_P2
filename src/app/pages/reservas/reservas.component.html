@@ -1,0 +1,96 @@
+<h3>Reserva de pistas</h3>
+
+<div *ngIf="checkSession()" class="form-group">
+    <form class="row pb-3">
+        
+        <!-- <label class="col-sm-2" for="datepicker">Fecha:</label> -->
+        <div class="col-sm-3">
+            <mat-form-field>
+                <input matInput [matDatepicker]="datepicker" placeholder="Fecha" (focus)="datepicker.open()" #date>
+                <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+                <mat-datepicker touchUi #datepicker (closed)="setDate(datepicker)"></mat-datepicker>
+            </mat-form-field>
+        </div>
+
+        <!-- <label class="col-sm-2" for="time">Hora:</label> -->
+        <div class="col-sm-3">
+            <mat-form-field>
+                <input matInput #time placeholder="Hora" (click)="openHoursDialog()" [disabled]="date.value === ''">
+            </mat-form-field>
+        </div>
+
+        <div *ngIf="hoursDialog" class="modal-container">
+            <div class="dialog">
+                <div class="dialog__header mb-3 pb-3"><button class="btn rigthAlign" (click)="closeHoursDialog()">X</button></div>
+                <span class="pb-3" *ngFor="let hour of availableHours"><button class="btn hour-btn" type="button" (click)="selectHour(hour, time)">{{ hour }}</button></span>
+                <span *ngIf="!availableHours.length">No hay disponibilidad, elija otro día.</span>
+            </div>
+        </div>
+
+        <!-- <label class="col-sm-2" for="court">Pista:</label> -->
+        <div class="col-sm-3">
+            <mat-form-field>
+                <mat-select placeholder="Pista" [(ngModel)]="selectedCourt" name="court" #court>
+                    <mat-option *ngFor="let court of courts" [value]="court.value">{{court.label}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="col-sm-3 mt-3">
+            <button class="btn" id="reservationButton" type="button" (click)="reserve()" [disabled]="date.value ==='' || time.value ==='' || !court.value">Reservar</button>
+        </div>
+
+    </form>
+    
+    <article class="currentReservations">
+        <h5>Tienes {{userReservations.length}} reserva<span *ngIf="userReservations.length !== 1">s</span></h5>
+        <table *ngIf="userReservations.length; let i = index" class="table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Pista</th>
+                    <th>Día</th>
+                    <th>Hora</th>
+                    <th>Fecha en milisegundos</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let reserva of userReservations">
+                    <td>{{ i }}</td>
+                    <td>{{ reserva.courtId }}</td>
+                    <td>{{ reserva.rsvday }}</td>
+                    <td>{{ reserva.rsvtime }}</td>
+                    <td>{{ reserva.rsvdateTime }}</td>
+                    <td (click)="deteteReservation(reserva.rsvId)"><i class="fas fa-trash-alt"></i></td>
+                </tr>
+            </tbody>
+        </table>
+    </article>
+
+
+    <div *ngIf="errors.session" class="alert alert-warning" role="alert">
+        Sesión caducada, vuelva a iniciar sesión.
+    </div>
+
+    <div *ngIf="errors.invalidReservation" class="alert alert-warning" role="alert">
+        Los datos de la reserva no son válidos, inténtelo con otros.
+    </div>
+
+    <div *ngIf="errors.internalError" class="alert alert-warning" role="alert">
+        Se ha producido un error y la acción no se ha completado.
+    </div>
+
+    <div *ngIf="errors.maximumReservationsReached" class="alert alert-warning" role="alert">
+        Se ha alcanzado el número máximo de reservas.
+    </div>
+
+    <div *ngIf="errors.server" class="alert alert-warning" role="alert">
+        Error en el servidor, no se ha podido completar la reserva.
+    </div>
+    
+</div>
+
+<div *ngIf="!checkSession()" class="alert alert-warning" role="alert">
+    Inicie sesión para acceder a la reservas de pista.
+</div>

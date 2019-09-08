@@ -1,0 +1,31 @@
+<form name="loginForm" method='post' action="#" id="loginForm">
+    <div class="form-group row">
+        <label class="col-sm-2" for="IDuser">Usuario:</label>
+        <div class="col-sm-6">
+            <input class="form-control" type="Text" name="usuario" #IDuser required placeholder="Identificador de usuario">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2" for="IDpassword">Clave:</label>
+        <div class="col-sm-6">
+            <input class="form-control" type="Text" name="password" #IDpassword required placeholder="Clave">
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-6">
+            <button class="btn" id="loginButton" type="button" (click)="login(IDuser, IDpassword)">Log in</button>
+        </div>
+    </div>
+    <div *ngIf="errors.login" class="alert alert-danger" role="alert">
+        Clave errónea.
+    </div>
+    <div *ngIf="errors.user" class="alert alert-danger" role="alert">
+        Usuario no registrado en base de datos.
+    </div>
+    <div *ngIf="errors.server" class="alert alert-warning" role="alert">
+        Error en el servidor. No se puede iniciar sesión.
+    </div>
+</form>
+
+<!-- Angular material -> modal -->
